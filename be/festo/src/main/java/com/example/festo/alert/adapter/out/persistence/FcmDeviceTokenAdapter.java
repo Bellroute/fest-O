@@ -6,6 +6,8 @@ import com.example.festo.member.application.port.out.SaveFcmDeviceTokenPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -29,5 +31,16 @@ public class FcmDeviceTokenAdapter implements SaveFcmDeviceTokenPort, LoadFcmDev
         }
 
         return null;
+    }
+
+    @Override
+    public List<FcmDeviceToken> loadFcmDeviceTokenByMemberId(Long memberId) {
+        List<FcmDeviceTokenEntity> fcmDeviceTokenEntityList = fcmDeviceTokenRepository.findAllByMemberId(memberId);
+        List<FcmDeviceToken> domainList = new ArrayList<>();
+        for(FcmDeviceTokenEntity entity : fcmDeviceTokenEntityList){
+            FcmDeviceToken domain = new FcmDeviceToken(memberId, entity.getToken());
+            domainList.add(domain);
+        }
+        return domainList;
     }
 }
