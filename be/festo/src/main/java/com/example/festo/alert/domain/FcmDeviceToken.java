@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class FcmDeviceToken {
 
-    private Long memberId;
+    private final Long memberId;
 
-    private String token;
+    private final String token;
 
     public FcmDeviceToken(Long memberId, String token) {
         this.memberId = memberId;

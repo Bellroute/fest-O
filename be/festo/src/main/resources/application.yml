@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: lcm
-    url: jdbc:mysql://localhost:3306/festo?serverTimezone=Asia/Seoul
+    username: root
+    url: jdbc:mysql://k8c106.p.ssafy.io:3306/festo?serverTimezone=Asia/Seoul
     password: 1234
 
   jpa:
