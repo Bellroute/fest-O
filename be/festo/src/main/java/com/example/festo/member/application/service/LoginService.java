@@ -26,8 +26,10 @@ public class LoginService implements LoginUseCase {
     public LoginResponse login(Long authId, String nickname, String profileUrl) {
 
         Member member;
+        Long memberId;
         try {
             member = loadMemberPort.loadMember(AuthId.of(authId));
+            memberId = member.getId();
         } catch (NoSuchElementException e) {
             member = Member.builder()
                            .authId(AuthId.of(authId))
@@ -35,12 +37,12 @@ public class LoginService implements LoginUseCase {
                            .profileImageUrl(ProfileImageUrl.of(profileUrl))
                            .build();
 
-            joinMemberPort.join(member);
+            memberId = joinMemberPort.join(member);
         }
 
         String accessToken = jwtUtil.createAccessToken(member.getId());
         String refreshToken = jwtUtil.createRefreshToken(member.getId());
 
-        return new LoginResponse(accessToken, refreshToken);
+        return new LoginResponse(accessToken, refreshToken, memberId);
     }
 }

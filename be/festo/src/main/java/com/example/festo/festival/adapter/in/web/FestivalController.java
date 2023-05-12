@@ -1,5 +1,6 @@
 package com.example.festo.festival.adapter.in.web;
 
+import com.example.festo.common.exception.CustomIsPresentException;
 import com.example.festo.festival.adapter.in.web.model.FestivalRequest;
 import com.example.festo.festival.adapter.in.web.model.FestivalResponse;
 import com.example.festo.festival.application.port.in.*;
@@ -80,7 +81,8 @@ public class FestivalController {
     public ResponseEntity<?> getFestivalIdByInviteCode(@PathVariable("festival_id") Long festivalId) {
         log.info("페스티벌 초대코드 조회 컨트롤러 시작");
         String inviteCode = getInviteCodeUseCase.getInviteCodeById(festivalId);
-        return new ResponseEntity<String>(inviteCode, HttpStatus.OK);
+        FestivalResponse.InviteCode inviteCodeResponse = new FestivalResponse.InviteCode(inviteCode);
+        return new ResponseEntity<FestivalResponse.InviteCode>(inviteCodeResponse, HttpStatus.OK);
     }
 
     @GetMapping("festivals/manager")
@@ -111,6 +113,15 @@ public class FestivalController {
 
         return new ResponseEntity<>(detail, HttpStatus.OK);
     }
+    @GetMapping("festival/{manager_id}/manager")
+    public ResponseEntity<?> isOpenFestival(@PathVariable("manager_id") Long managerId) {
+        log.info("manager가 축제 개설 여부 조회 컨트롤러 시작");
+
+        boolean isOpen = getFestivalDetailUseCase.isOpenByManagerId(managerId);
+        FestivalResponse.IsOpen isOpenResponse = new FestivalResponse.IsOpen(isOpen);
+        return new ResponseEntity<>(isOpenResponse, HttpStatus.OK);
+    }
+
 
 
 }

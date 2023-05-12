@@ -121,4 +121,22 @@ public class BoothPersistenceAdapter implements SaveBoothPort, LoadFiestaListPor
                 .build();
         return domain;
     }
+
+    @Override
+    public List<Booth> loadBoothByOwnerId(Long ownerId) {
+        List<BoothEntity> entityList = boothRepository.findAllByOwnerId(ownerId);
+        List<Booth> domainList = new ArrayList<>();
+        for(BoothEntity entity : entityList){
+            Booth domain = Booth.builder()
+                    .boothId(entity.getBoothId())
+                    .name(entity.getName())
+                    .boothDescription(entity.getBoothDescription())
+                    .imageUrl(entity.getImageUrl())
+                    .build();
+
+            domainList.add(domain);
+        }
+
+        return domainList;
+    }
 }

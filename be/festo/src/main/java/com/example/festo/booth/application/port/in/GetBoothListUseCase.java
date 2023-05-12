@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface GetBoothListUseCase {
     List<Booth> getBoothList(Long fiestaId);
+    List<Booth> getBoothListByOwner(Long ownerId);
 }

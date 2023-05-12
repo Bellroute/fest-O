@@ -14,6 +14,8 @@ public class FestivalResponse {
         private Long festivalId;
         private String imageUrl;
         private String name;
+        private LocalDate startDate;
+        private LocalDate endDate;
     }
 
     @Getter
@@ -63,6 +65,24 @@ public class FestivalResponse {
 
         public Invitation(Long festivalId) {
             this.festivalId = festivalId;
+        }
+    }
+    @Getter
+    public static class InviteCode {
+
+        private final String inviteCode;
+
+        public InviteCode(String inviteCode) {
+            this.inviteCode = inviteCode;
+        }
+    }
+    @Getter
+    public static class IsOpen {
+
+        private final boolean isOpen;
+
+        public IsOpen(boolean isOpen) {
+            this.isOpen = isOpen;
         }
     }
 }

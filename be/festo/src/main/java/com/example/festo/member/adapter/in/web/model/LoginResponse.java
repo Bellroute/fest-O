@@ -11,8 +11,11 @@ public class LoginResponse {
 
     private String refreshToken;
 
-    public LoginResponse(String accessToken, String refreshToken) {
+    private Long memberId;
+
+    public LoginResponse(String accessToken, String refreshToken, Long memberId) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
+        this.memberId = memberId;
     }
 }

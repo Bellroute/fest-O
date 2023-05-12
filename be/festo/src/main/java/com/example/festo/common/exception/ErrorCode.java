@@ -16,7 +16,8 @@ public enum ErrorCode {
     INVITE_CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 코드에 맞는 축제를 찾을 수 없습니다."),
     ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 주문을 찾을 수 없습니다."),
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 맴버를 찾을 수 없습니다."),
-    PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 상품을 찾을 수 없습니다.");
+    PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 상품을 찾을 수 없습니다."),
+    FESTIVAL_IS_PRESENT(HttpStatus.FORBIDDEN, "이미 개설한 축제가 존재합니다.");
 
     private final HttpStatus httpStatus;
     private final String message;

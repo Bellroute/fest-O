@@ -102,7 +102,7 @@ public class BoothController {
         return new ResponseEntity<>(detailResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/festivals/{festival_id}/booths")
+    @GetMapping("festivals/{festival_id}/booths")
     public ResponseEntity<?> getBoothList(@PathVariable("festival_id")Long festivalId){
         log.info("부스 목록 리스트 상세 조회 컨트롤러 시작");
         List<Booth> domainList = getBoothListUseCase.getBoothList(festivalId);
@@ -120,4 +120,22 @@ public class BoothController {
         return new ResponseEntity<>(boothList, HttpStatus.OK);
     }
 
+
+    @GetMapping("booths/{owner_id}/owner")
+    public ResponseEntity<?> getBoothListByOwner(@PathVariable("owner_id")Long ownerId){
+        log.info("부스운영자가 운영 중인 부스 목록 리스트 상세 조회 컨트롤러 시작");
+        List<Booth> domainList = getBoothListUseCase.getBoothListByOwner(ownerId);
+        List<BoothResponse.Booths> boothList = new ArrayList<>();
+        for(Booth domain : domainList){
+            BoothResponse.Booths boothResponse = BoothResponse.Booths.builder()
+                    .boothId(domain.getBoothId())
+                    .name(domain.getName())
+                    .description(domain.getBoothDescription())
+                    .imageUrl(domain.getImageUrl())
+                    .build();
+
+            boothList.add(boothResponse);
+        }
+        return new ResponseEntity<>(boothList, HttpStatus.OK);
+    }
 }

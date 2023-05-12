@@ -77,4 +77,9 @@ public class BoothService implements RegisterBoothUseCase, GetFiestaListUseCase,
     public List<Booth> getBoothList(Long fiestaId) {
         return loadBoothPort.loadBoothByFiestaId(fiestaId);
     }
+
+    @Override
+    public List<Booth> getBoothListByOwner(Long ownerId) {
+        return loadBoothPort.loadBoothByOwnerId(ownerId);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.festo.festival.application.service;
 
 
+import com.example.festo.common.exception.CustomIsPresentException;
 import com.example.festo.festival.adapter.in.web.model.FestivalResponse;
 
 import com.example.festo.festival.application.port.in.*;
@@ -20,6 +21,7 @@ public class FestivalService implements RegisterFestivalUseCase, GetFestivalsUse
     private final LoadFestivalIdPort loadFestivalIdPort;
     private final LoadInviteCodePort loadInviteCodePort;
     private final LoadFestivalDetailPort loadFestivalDetailPort;
+    private final LoadIsOpenFestivalPort loadIsOpenFestivalPort;
 
 
     @Override
@@ -74,5 +76,10 @@ public class FestivalService implements RegisterFestivalUseCase, GetFestivalsUse
     public Festival getFestivalDetailByFestivalId(Long festivalId) {
         Festival domain = loadFestivalDetailPort.loadFestivalDetailByFestivalId(festivalId);
         return domain;
+    }
+
+    @Override
+    public boolean isOpenByManagerId(Long mangerId) {
+        return loadIsOpenFestivalPort.isOpenFestivalByManagerId(mangerId);
     }
 }

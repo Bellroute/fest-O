@@ -19,12 +19,16 @@ import java.util.stream.Collectors;
 @Slf4j
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = { CustomNoSuchException.class })
-    protected ResponseEntity<ErrorResponseEntity> handleCustomException(CustomNoSuchException e) {
-        log.error("handleCustomException throw CustomNoSuchException : {}", e.getErrorCode());
+    protected ResponseEntity<ErrorResponseEntity> handleCustomNoSuchException(CustomNoSuchException e) {
+        log.error("handleCustomNoSuchException throw CustomNoSuchException : {}", e.getErrorCode());
         return ErrorResponseEntity.toResponseEntity(e.getErrorCode());
     }
 
-
+    @ExceptionHandler(value = { CustomIsPresentException.class })
+    protected ResponseEntity<ErrorResponseEntity> handleCustomIsPresentException(CustomIsPresentException e) {
+        log.error("handleCustomIsPresentException throw CustomIsPresentException : {}", e.getErrorCode());
+        return ErrorResponseEntity.toResponseEntity(e.getErrorCode());
+    }
 
     @ExceptionHandler(value = { MethodArgumentNotValidException.class })
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {

@@ -7,4 +7,5 @@ import java.util.List;
 public interface LoadBoothPort {
     List<Booth> loadBoothByFiestaId(Long fiestaId);
     Booth loadBoothById(Long boothId);
+    List<Booth> loadBoothByOwnerId(Long ownerId);
 }
