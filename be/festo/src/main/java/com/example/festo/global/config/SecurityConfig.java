@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                                  .requestMatchers(AntPathRequestMatcher.antMatcher("/error/**")).permitAll()
+                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/mock/**")).permitAll()
                                  .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/v1/login")).permitAll()
                                  .anyRequest().authenticated()
                 )
