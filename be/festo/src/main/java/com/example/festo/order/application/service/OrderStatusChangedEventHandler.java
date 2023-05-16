@@ -47,6 +47,7 @@ public class OrderStatusChangedEventHandler {
         }
 
         receivers.forEach(receiver -> {
+            System.out.println(receiver.getMemberId() + " " + receiver.getToken());
             try {
                 firebaseCloudMessageService.sendMessageTo(receiver.getToken(), status.getTitle(), status.getMessage());
                 saveNotificationUseCase.saveNotification(receiver.getMemberId(), event.getOrderId(), event.getTimestamp());
